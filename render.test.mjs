@@ -554,6 +554,28 @@ test('hideSetFromEnv: 空缺省全显、逗号分隔、未知段忽略、大小�
   assert.ok(HIDE_KEYS.includes('ctxabs') && HIDE_KEYS.length === 10);
 });
 
+test('hideSetFromEnv: 文档拼法 fiveHour 生效（回归：曾被 toLowerCase 静默丢弃）', () => {
+  assert.deepEqual([...hideSetFromEnv({ GLM_HUD_HIDE: 'fiveHour' })], ['fiveHour']);
+  assert.deepEqual([...hideSetFromEnv({ GLM_HUD_HIDE: 'fivehour' })], ['fiveHour']);
+  assert.deepEqual([...hideSetFromEnv({ GLM_HUD_HIDE: 'FIVEHOUR' })], ['fiveHour']);
+  assert.deepEqual([...hideSetFromEnv({ GLM_HUD_HIDE: ' fiveHour , MCP ' })], ['fiveHour', 'mcp']);
+  // 全部 10 键（文档字符串原样）→ 全集，去重不膨胀
+  const all = 'badge,effort,dir,branch,ctx,ctxabs,env,fiveHour,week,mcp';
+  assert.equal(hideSetFromEnv({ GLM_HUD_HIDE: all }).size, 10);
+});
+
+test('renderLines hide: 走 hideSetFromEnv 全链路（env 字符串 → 段消失 → 全隐藏 [hud]）', () => {
+  const v = buildView(PAYLOAD, '/fb');
+  const env = { GLM_HUD_HIDE: 'fiveHour' };
+  const hide = hideSetFromEnv(env);
+  const out = renderLines(v, QUOTA, null, null, 140, NOW, hide);
+  assert.ok(!stripAnsi(out.join('\n')).includes('⚡︎5h'), 'fiveHour 经 env 隐藏');
+  assert.ok(stripAnsi(out[1]).includes('周') && stripAnsi(out[1]).includes('MCP'), '其余配额保留');
+  const all = hideSetFromEnv({ GLM_HUD_HIDE: 'badge,effort,dir,branch,ctx,ctxabs,env,fiveHour,week,mcp' });
+  const sentinel = renderLines(v, QUOTA, { branch: 'main', dirty: true }, 'env默认:flash', 140, NOW, all);
+  assert.deepEqual(sentinel.map(stripAnsi), ['[hud]'], '全隐藏兜底');
+});
+
 test('renderLines hide: 单段（mcp）/多段，未知段无影响', () => {
   const v = buildView(PAYLOAD, '/fb');
   const full = renderLines(v, QUOTA, null, null, 140, NOW, new Set(['mcp']));

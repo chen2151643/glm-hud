@@ -62,7 +62,10 @@ export function hideSetFromEnv(env) {
   const set = new Set();
   for (const tok of raw.split(',')) {
     const k = tok.trim().toLowerCase();
-    if (HIDE_KEYS.includes(k)) set.add(k);
+    // 大小写不敏感匹配后回落到规范拼写：fiveHour 是唯一带大写的键，
+    // 直接 includes(k) 会把文档写的 GLM_HUD_HIDE=fiveHour 变 fivehour 静默丢弃
+    const key = HIDE_KEYS.find((name) => name.toLowerCase() === k);
+    if (key) set.add(key);
   }
   return set;
 }

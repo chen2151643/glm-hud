@@ -93,6 +93,9 @@ function install(args) {
     process.exit(3);
   }
 
+  // 配置目录可能不存在（自定义 CLAUDE_CONFIG_DIR 指向新路径）——先建好再写 settings.json
+  mkdirSync(join(settingsPath, '..'), { recursive: true });
+
   // Stable-path launcher: settings.json points here, never into the versioned
   // plugin cache, so plugin updates never need setup again.
   const hudDir = launcherDest().slice(0, launcherDest().lastIndexOf('/'));

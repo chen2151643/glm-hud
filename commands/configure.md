@@ -17,7 +17,7 @@ Read settings.json and note:
 - `env.GLM_HUD_THEME` and `env.GLM_HUD_HIDE` (either may be absent — absent means the defaults: `dark`, nothing hidden)
 - whether an `env` block exists at all
 
-Also check `~/.zshrc`, `~/.bashrc`, `~/.profile`, and `~/.bash_profile` for `GLM_HUD_` lines (a simple grep is fine). If any is found, mention it in Step 3: for the status line, settings.json `env` wins because Claude Code applies its env block over the inherited shell environment.
+Also Read `~/.zshrc`, `~/.bashrc`, `~/.profile`, and `~/.bash_profile` if they exist (missing files are fine) and look for `GLM_HUD_` lines — the Read tool is enough, no shell needed. If any is found, mention it in Step 3: for the status line, settings.json `env` wins because Claude Code applies its env block over the inherited shell environment.
 
 Segment keys for `GLM_HUD_HIDE`, with their on-screen labels:
 

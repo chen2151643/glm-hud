@@ -110,7 +110,7 @@ Segments drop in a fixed priority order rather than overflowing:
 ## Development
 
 ```bash
-node --test        # 99 tests: parsing, rendering, degradation, themes, e2e pipe
+node --test        # 101 tests: parsing, rendering, degradation, themes, e2e pipe
 ```
 
 The palette tests compute WCAG contrast ratios against both backgrounds and fail if a color regresses below 4.5:1 (3:1 for bold/bars).

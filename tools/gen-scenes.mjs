@@ -102,6 +102,12 @@ function colorsUsed(ansi, theme) {
 }
 
 // ── 跑一个场景：注入缓存 → 受控 env 跑 statusline → ansi2html → 落盘 ────────────
+// OSC8 href 脱敏：预览工件不携带本机绝对路径（与测试夹具同款 /home/dev 路径；
+// 只改链接元数据，可见像素不变，已提交的 PNG 截图保持同步）
+const sanitizeHref = (ansi) => ansi
+  .replaceAll('file://' + DEMO_CWD, 'file:///home/dev/projects/demo-app')
+  .replaceAll('file://' + ROOT, 'file:///home/dev/projects/glm-hud');
+
 function runScene(s) {
   const theme = s.theme || 'dark'; // 默认主题 dark（黑底终端）
   if (s.quota) writeQuotaCache(s.quota);
@@ -112,7 +118,7 @@ function runScene(s) {
   const r = spawnSync('node', [join(ROOT, 'statusline.mjs')], {
     input: JSON.stringify(s.payload), encoding: 'utf8', env, timeout: 15_000,
   });
-  const ansi = r.stdout || '';
+  const ansi = sanitizeHref(r.stdout || '');
   writeFileSync(join(PREVIEW, s.id + '.ansi'), ansi);
   const h = spawnSync('node', [join(ROOT, 'tools/ansi2html.mjs'), ...(theme === 'dark' ? ['--dark'] : []), s.title], {
     input: ansi, encoding: 'utf8', timeout: 15_000,
