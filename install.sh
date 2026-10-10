@@ -1,11 +1,16 @@
 #!/usr/bin/env sh
 # glm-hud installer — clones nothing (you already cloned this repo), just wires
 # the statusLine block into ~/.claude/settings.json (macOS & Linux, idempotent).
+# Equivalent to the /glm-hud:setup plugin command: same statusLine block
+# (refreshInterval 60 included), timestamped backup, and it asks before
+# replacing a third-party statusLine (--force to skip the prompt).
 set -eu
 
 SETTINGS="${CLAUDE_SETTINGS:-$HOME/.claude/settings.json}"
 HERE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 CMD="node $HERE/statusline.mjs"
+FORCE=0
+[ "${1:-}" = "--force" ] && FORCE=1
 
 command -v node >/dev/null 2>&1 || { echo "error: node (>=20) is required"; exit 1; }
 NODE_MAJOR=$(node -p 'process.versions.node.split(".")[0]')
@@ -14,20 +19,42 @@ NODE_MAJOR=$(node -p 'process.versions.node.split(".")[0]')
 mkdir -p "$(dirname "$SETTINGS")"
 [ -f "$SETTINGS" ] || echo '{}' > "$SETTINGS"
 
-if command -v node >/dev/null 2>&1; then
-  CLAUDE_SETTINGS="$SETTINGS" HUD_CMD="$CMD" node - <<'NODEEOF'
+CLAUDE_SETTINGS="$SETTINGS" HUD_CMD="$CMD" FORCE="$FORCE" node - <<'NODEEOF'
 const fs = require('fs');
 const path = process.env.CLAUDE_SETTINGS;
 const cmd = process.env.HUD_CMD;
-const settings = JSON.parse(fs.readFileSync(path, 'utf8'));
+let settings;
+try {
+  settings = JSON.parse(fs.readFileSync(path, 'utf8'));
+} catch (e) {
+  console.error('error: ' + path + ' is not valid JSON (' + e.message + ')');
+  console.error('fix or remove that file first, then re-run this script.');
+  process.exit(1);
+}
 const prev = settings.statusLine && settings.statusLine.command;
-settings.statusLine = { type: 'command', command: cmd };
-fs.writeFileSync(path, JSON.stringify(settings, null, 2) + '\n');
+const ours = !prev || String(prev).includes('glm-hud');
+if (!ours && process.env.FORCE !== '1') {
+  if (process.stdin.isTTY) {
+    process.stdout.write('existing statusLine found:\n  ' + prev + '\nReplace it with glm-hud? [y/N] ');
+    const answer = fs.readFileSync(0, 'utf8').trim().toLowerCase();
+    if (answer !== 'y' && answer !== 'yes') { console.log('kept your current statusLine, changed nothing.'); process.exit(0); }
+  } else {
+    console.error('existing (non-glm-hud) statusLine found: ' + prev);
+    console.error('re-run with --force to replace it (a timestamped backup is kept either way).');
+    process.exit(1);
+  }
+}
+const backup = path + '.backup-' + new Date().toISOString().replace(/[:.]/g, '-');
+fs.copyFileSync(path, backup);
+settings.statusLine = { type: 'command', command: cmd, refreshInterval: 60 };
+const tmp = path + '.' + process.pid + '.tmp';
+fs.writeFileSync(tmp, JSON.stringify(settings, null, 2) + '\n');
+fs.renameSync(tmp, path);
 console.log(prev === cmd ? 'statusLine already wired: ' + cmd
   : prev ? 'statusLine updated: ' + prev + '  ->  ' + cmd
          : 'statusLine added: ' + cmd);
+console.log('backup: ' + backup);
 NODEEOF
-fi
 
-echo "done. restart Claude Code (new session) to load the statusline."
+echo "done. the HUD shows up below your input after your next message (restart Claude Code if it doesn't)."
 echo "uninstall: sh $(dirname "$0")/uninstall.sh"

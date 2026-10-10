@@ -1,0 +1,17 @@
+{
+  "name": "glm-hud",
+  "owner": { "name": "chen" },
+  "metadata": {
+    "description": "Shareable two-line statusline for Claude Code users on the GLM Coding Plan - live 5-hour/weekly/MCP quotas, context usage, model, effort and git branch",
+    "version": "1.1.0"
+  },
+  "plugins": [
+    {
+      "name": "glm-hud",
+      "source": "./",
+      "description": "Two-line statusline showing GLM Coding Plan quotas (5h / weekly / MCP), context usage, model and git branch. One-command install, zero config required.",
+      "category": "monitoring",
+      "tags": ["statusline", "hud", "glm", "quota", "usage", "zai", "bigmodel", "context", "claude-code"]
+    }
+  ]
+}

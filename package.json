@@ -1,6 +1,6 @@
 {
   "name": "glm-hud",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "claude-hud-style two-line statusline for Claude Code: GLM Coding Plan quotas (5h / weekly / MCP), context usage, model, effort, dir and git branch",
   "license": "MIT",
   "type": "module",
