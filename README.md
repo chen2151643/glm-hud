@@ -25,9 +25,10 @@ Requires **Node.js ≥ 20** (built-in `fetch`). Optional: `git` (the branch segm
 
 ```bash
 git clone https://github.com/chen2151643/glm-hud.git ~/.claude/glm-hud
+sh ~/.claude/glm-hud/install.sh     # wires statusLine into ~/.claude/settings.json (idempotent)
 ```
 
-Then point Claude Code at it in `~/.claude/settings.json`:
+`install.sh` merges the `statusLine` block into your `~/.claude/settings.json` and never touches other keys; `uninstall.sh` removes exactly that block. Prefer manual? Point Claude Code at it yourself:
 
 ```json
 {
@@ -94,6 +95,10 @@ node --test        # 99 tests: parsing, rendering, degradation, themes, e2e pipe
 ```
 
 The palette tests compute WCAG contrast ratios against both backgrounds and fail if a color regresses below 4.5:1 (3:1 for bold/bars).
+
+## Why not a plugin?
+
+Claude Code has two extension lines: **plugins/mods** (`.claude-plugin/` packages — commands, agents, hooks; rendered UI sits *above* the prompt as bands/panes with single-line plain-text status entries) and the **statusLine command** (a script under the input box, multiple lines, full ANSI color). The below-the-input, two-line, colored HUD you see in claude-hud and ccstatusline is only possible through the statusline command — so glm-hud is a standalone script directory that `settings.json` points at, the same distribution shape as those projects. There is no plugin directory involved.
 
 ## License
 
