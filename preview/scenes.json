@@ -1,0 +1,507 @@
+[
+  {
+    "id": "s1",
+    "label": "宽140列·全量：徽章[GLM-5.3·1M·high] + glm-hud git:(main*) + Context 45% + ⚡︎5h 24% 剩41m + 周 19% 剩2d8h + MCP 31% 309/1000（四段全共存，MCP 补百分比）",
+    "cols": 140,
+    "theme": "dark",
+    "lineCount": 2,
+    "lineWidths": [
+      73,
+      89
+    ],
+    "overflow": false,
+    "hasNaN": false,
+    "colors": [
+      {
+        "idx": 39,
+        "name": "healthy",
+        "contrast": 6.96,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 80,
+        "name": "branch",
+        "contrast": 9.89,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 143,
+        "name": "project",
+        "contrast": 7.4,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 176,
+        "name": "git",
+        "contrast": 6.77,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 242,
+        "name": "dimBar",
+        "contrast": 3.25,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 246,
+        "name": "dim",
+        "contrast": 5.62,
+        "bold": false,
+        "plain": true
+      }
+    ],
+    "plainPreview": [
+      "[GLM-5.3·1M·high] │ glm-hud git:(main*) │ Context █████░░░░░ 45% 90k/200k",
+      "⚡︎5h ██░░░░░░░░ 24% 剩41m │ 周 ██░░░░░░░░ 19% 剩2d8h │ MCP ███░░░░░░░ 31% 309/1000 剩3h12m"
+    ]
+  },
+  {
+    "id": "s2",
+    "label": "宽100列：Context+⚡︎5h+周 三段共存，MCP 尾段放不下被丢",
+    "cols": 100,
+    "theme": "dark",
+    "lineCount": 2,
+    "lineWidths": [
+      73,
+      89
+    ],
+    "overflow": false,
+    "hasNaN": false,
+    "colors": [
+      {
+        "idx": 39,
+        "name": "healthy",
+        "contrast": 6.96,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 80,
+        "name": "branch",
+        "contrast": 9.89,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 143,
+        "name": "project",
+        "contrast": 7.4,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 176,
+        "name": "git",
+        "contrast": 6.77,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 242,
+        "name": "dimBar",
+        "contrast": 3.25,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 246,
+        "name": "dim",
+        "contrast": 5.62,
+        "bold": false,
+        "plain": true
+      }
+    ],
+    "plainPreview": [
+      "[GLM-5.3·1M·high] │ glm-hud git:(main*) │ Context █████░░░░░ 45% 90k/200k",
+      "⚡︎5h ██░░░░░░░░ 24% 剩41m │ 周 ██░░░░░░░░ 19% 剩2d8h │ MCP ███░░░░░░░ 31% 309/1000 剩3h12m"
+    ]
+  },
+  {
+    "id": "s3",
+    "label": "宽70列·有配额：窄条 W=4 两行档（空槽同字形 █），Context+⚡︎5h+周 共存，MCP 丢",
+    "cols": 70,
+    "theme": "dark",
+    "lineCount": 2,
+    "lineWidths": [
+      67,
+      62
+    ],
+    "overflow": false,
+    "hasNaN": false,
+    "colors": [
+      {
+        "idx": 39,
+        "name": "healthy",
+        "contrast": 6.96,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 80,
+        "name": "branch",
+        "contrast": 9.89,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 143,
+        "name": "project",
+        "contrast": 7.4,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 176,
+        "name": "git",
+        "contrast": 6.77,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 242,
+        "name": "dimBar",
+        "contrast": 3.25,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 246,
+        "name": "dim",
+        "contrast": 5.62,
+        "bold": false,
+        "plain": true
+      }
+    ],
+    "plainPreview": [
+      "[GLM-5.3·1M·high] │ glm-hud git:(main*) │ Context ████ 45% 90k/200k",
+      "⚡︎5h ████ 24% 剩41m │ 周 ████ 19% 剩2d8h │ MCP ████ 31% 剩3h12m"
+    ]
+  },
+  {
+    "id": "s4",
+    "label": "宽50列·compact 单行降级（<60 阈值）：C 标签归属 Context 用量",
+    "cols": 50,
+    "theme": "dark",
+    "lineCount": 1,
+    "lineWidths": [
+      50
+    ],
+    "overflow": false,
+    "hasNaN": false,
+    "colors": [
+      {
+        "idx": 39,
+        "name": "healthy",
+        "contrast": 6.96,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 80,
+        "name": "branch",
+        "contrast": 9.89,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 143,
+        "name": "project",
+        "contrast": 7.4,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 176,
+        "name": "git",
+        "contrast": 6.77,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 242,
+        "name": "dimBar",
+        "contrast": 3.25,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 246,
+        "name": "dim",
+        "contrast": 5.62,
+        "bold": false,
+        "plain": true
+      }
+    ],
+    "plainPreview": [
+      "[GLM-5.3·1M·high] | glm-hud git:(main*) | C | ████"
+    ]
+  },
+  {
+    "id": "s5",
+    "label": "宽140列·⚡︎5h=93% 周=91% 双 critical 亮红警示（dark 203，5.7:1；light 124，7.1:1）+ env默认:flash 信息段（L1 行尾 dim 灰）",
+    "cols": 140,
+    "theme": "dark",
+    "lineCount": 2,
+    "lineWidths": [
+      89,
+      93
+    ],
+    "overflow": false,
+    "hasNaN": false,
+    "colors": [
+      {
+        "idx": 39,
+        "name": "healthy",
+        "contrast": 6.96,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 80,
+        "name": "branch",
+        "contrast": 9.89,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 143,
+        "name": "project",
+        "contrast": 7.4,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 176,
+        "name": "git",
+        "contrast": 6.77,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 203,
+        "name": "critical",
+        "contrast": 5.72,
+        "bold": true,
+        "plain": false
+      },
+      {
+        "idx": 242,
+        "name": "dimBar",
+        "contrast": 3.25,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 246,
+        "name": "dim",
+        "contrast": 5.62,
+        "bold": false,
+        "plain": true
+      }
+    ],
+    "plainPreview": [
+      "[GLM-5.3·1M·high] │ glm-hud git:(main*) │ Context █████░░░░░ 45% 90k/200k │ env默认:flash",
+      "⚠︎ ⚡︎5h █████████░ 93% 剩41m │ ⚠︎ 周 █████████░ 91% 剩2d8h │ MCP ███░░░░░░░ 31% 309/1000 剩3h12m"
+    ]
+  },
+  {
+    "id": "s6",
+    "label": "宽140列·无 token：配额组整体省略（无占位、无 ⚠︎）+ env默认:flash 信息段",
+    "cols": 140,
+    "theme": "dark",
+    "lineCount": 1,
+    "lineWidths": [
+      89
+    ],
+    "overflow": false,
+    "hasNaN": false,
+    "colors": [
+      {
+        "idx": 39,
+        "name": "healthy",
+        "contrast": 6.96,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 80,
+        "name": "branch",
+        "contrast": 9.89,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 143,
+        "name": "project",
+        "contrast": 7.4,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 176,
+        "name": "git",
+        "contrast": 6.77,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 242,
+        "name": "dimBar",
+        "contrast": 3.25,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 246,
+        "name": "dim",
+        "contrast": 5.62,
+        "bold": false,
+        "plain": true
+      }
+    ],
+    "plainPreview": [
+      "[GLM-5.3·1M·high] │ glm-hud git:(main*) │ Context █████░░░░░ 45% 90k/200k │ env默认:flash"
+    ]
+  },
+  {
+    "id": "s7",
+    "label": "补充·宽170列：四段全量共存（Context+⚡︎5h+周+MCP 31% 309/1000），对照 s1 验证宽度富余",
+    "cols": 170,
+    "theme": "dark",
+    "lineCount": 2,
+    "lineWidths": [
+      73,
+      89
+    ],
+    "overflow": false,
+    "hasNaN": false,
+    "colors": [
+      {
+        "idx": 39,
+        "name": "healthy",
+        "contrast": 6.96,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 80,
+        "name": "branch",
+        "contrast": 9.89,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 143,
+        "name": "project",
+        "contrast": 7.4,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 176,
+        "name": "git",
+        "contrast": 6.77,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 242,
+        "name": "dimBar",
+        "contrast": 3.25,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 246,
+        "name": "dim",
+        "contrast": 5.62,
+        "bold": false,
+        "plain": true
+      }
+    ],
+    "plainPreview": [
+      "[GLM-5.3·1M·high] │ glm-hud git:(main*) │ Context █████░░░░░ 45% 90k/200k",
+      "⚡︎5h ██░░░░░░░░ 24% 剩41m │ 周 ██░░░░░░░░ 19% 剩2d8h │ MCP ███░░░░░░░ 31% 309/1000 剩3h12m"
+    ]
+  },
+  {
+    "id": "s8",
+    "label": "宽140列·警示档：Context 78% warn（dark 214 亮橙黄 / light 100 深黄）+ ⚡︎5h 81% quotaWarn（dark 213 / light 133）+ 周 34% 与 MCP 31% healthy（dark 39 / light 25）对照",
+    "cols": 140,
+    "theme": "dark",
+    "lineCount": 2,
+    "lineWidths": [
+      74,
+      89
+    ],
+    "overflow": false,
+    "hasNaN": false,
+    "colors": [
+      {
+        "idx": 39,
+        "name": "healthy",
+        "contrast": 6.96,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 80,
+        "name": "branch",
+        "contrast": 9.89,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 143,
+        "name": "project",
+        "contrast": 7.4,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 176,
+        "name": "git",
+        "contrast": 6.77,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 213,
+        "name": "quotaWarn",
+        "contrast": 8.25,
+        "bold": true,
+        "plain": false
+      },
+      {
+        "idx": 214,
+        "name": "warn",
+        "contrast": 9.24,
+        "bold": true,
+        "plain": false
+      },
+      {
+        "idx": 242,
+        "name": "dimBar",
+        "contrast": 3.25,
+        "bold": false,
+        "plain": true
+      },
+      {
+        "idx": 246,
+        "name": "dim",
+        "contrast": 5.62,
+        "bold": false,
+        "plain": true
+      }
+    ],
+    "plainPreview": [
+      "[GLM-5.3·1M·high] │ glm-hud git:(main*) │ Context ████████░░ 78% 156k/200k",
+      "⚡︎5h ████████░░ 81% 剩41m │ 周 ███░░░░░░░ 34% 剩2d8h │ MCP ███░░░░░░░ 31% 309/1000 剩3h12m"
+    ]
+  }
+]

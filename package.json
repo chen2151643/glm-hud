@@ -1,0 +1,26 @@
+{
+  "name": "glm-hud",
+  "version": "1.0.0",
+  "description": "claude-hud-style two-line statusline for Claude Code: GLM Coding Plan quotas (5h / weekly / MCP), context usage, model, effort, dir and git branch",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chen2151643/glm-hud.git"
+  },
+  "keywords": [
+    "claude-code",
+    "statusline",
+    "glm",
+    "zai",
+    "bigmodel",
+    "usage",
+    "hud"
+  ],
+  "scripts": {
+    "test": "node --test"
+  }
+}
