@@ -16,9 +16,19 @@ Nothing yet.
 - Quota countdowns carry seconds within the final hour (`剩41m07s`), so idle
   redraws are visible when `statusLine.refreshInterval` is set; FAQ documents
   the idle-refresh behavior.
+- CI: GitHub Actions workflow running `node --test` on Node 20 and 24 for
+  pushes to `main` and pull requests (zero dependencies, runs off checkout).
 
 ### Fixed
 
+- `scripts/launcher.mjs` now tries every installed version candidate
+  newest-first and falls back to the previous version when the newest fails
+  to import (e.g. a half-written upgrade), instead of degrading straight to
+  `[hud]`; plugin-over-clone preference and silent behavior when nothing is
+  installed are unchanged.
+- `install.sh` resolves `node` to an absolute path and POSIX-single-quotes
+  install paths containing spaces or special characters, matching what
+  `scripts/setup.mjs` writes.
 - `GLM_HUD_HIDE=fiveHour` never matched the 5-hour segment (the hide key was
   never compared, so the segment could not be hidden).
 - Generated `preview/` HTML pages no longer embed personal absolute paths.
