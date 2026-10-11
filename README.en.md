@@ -99,6 +99,10 @@ Segments drop in a fixed priority order rather than overflowing:
 - **Gray `⚡5h -- 周 -- MCP --` placeholders** — the token or network check failed (wrong token, or offline); it retries after 90 s.
 - **Nothing renders at all** — smoke-test outside Claude Code: `echo '{}' | node ~/.claude/glm-hud/statusline.mjs` (plugin installs: `node ~/.claude/plugins/glm-hud/statusline.mjs`). At least one line and a clean exit means the script is fine and the problem is the wiring — re-run `/glm-hud:setup`.
 
+## Does it update while idle?
+
+Yes. Claude Code only redraws the statusline after messages and a few events (idle periods are static by default — same for claude-hud/ccstatusline). Both `install.sh` and `/glm-hud:setup` write `statusLine.refreshInterval: 60` (the official engine knob, max 60s). Countdowns carry seconds within the last hour (`剩41m07s`) so idle redraws are visible; quota percentages come from the server and naturally hold still while no tokens are consumed.
+
 ## How it works
 
 - `statusline.mjs` reads the statusline JSON payload on stdin and renders ≤ 2 lines to stdout, always exiting 0 — a broken payload, missing git, or a dead network never breaks the prompt.

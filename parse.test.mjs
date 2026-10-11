@@ -123,7 +123,8 @@ test('formatCountdown: 全档位 + clamp + null', () => {
   assert.equal(formatCountdown(-5000), '0m');
   assert.equal(formatCountdown(0), '0m');
   assert.equal(formatCountdown(30_000), '30s');
-  assert.equal(formatCountdown(41 * 60_000), '41m');
+  assert.equal(formatCountdown(41 * 60_000), '41m00s');
+  assert.equal(formatCountdown(41 * 60_000 + 7_000), '41m07s');
   assert.equal(formatCountdown((2 * 3600 + 32 * 60) * 1000), '2h32m');
   assert.equal(formatCountdown((24 * 3600 + 14 * 3600) * 1000), '1d14h');
   assert.equal(formatCountdown((2 * 86400 + 14 * 3600) * 1000), '2d14h');

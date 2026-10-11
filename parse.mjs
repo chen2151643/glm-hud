@@ -127,14 +127,16 @@ export function withTranscriptTokens(view, usedTokens) {
 }
 
 // ── 格式化 ──────────────────────────────────────────────────────────
-// 倒计时：<=0→0m；<60s→Ns；<60m→Nm；<24h→NhMm；否则 NdNh；null/非有限数→--
+// 倒计时：<=0→0m；<60s→Ns；<60m→NmSSs（秒位让空闲期 refreshInterval 重绘肉眼可辨，
+// 纯分钟档 41m→42m 一分钟才 +1 看似静止——用户实测反馈）；<24h→NhMm；否则 NdNh；
+// null/非有限数→--
 export function formatCountdown(ms) {
   if (ms === null || ms === undefined || !Number.isFinite(ms)) return '--';
   if (ms <= 0) return '0m';
   const s = Math.floor(ms / 1000);
   if (s < 60) return s + 's';
   const m = Math.floor(s / 60);
-  if (m < 60) return m + 'm';
+  if (m < 60) return m + 'm' + String(s % 60).padStart(2, '0') + 's';
   const h = Math.floor(m / 60);
   if (h < 24) return h + 'h' + (m % 60) + 'm';
   const d = Math.floor(h / 24);
