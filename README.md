@@ -128,6 +128,8 @@ token 按以下顺序取：
 
 **6. Windows？** 原生 Windows 不支持（接线层依赖 POSIX 路径与 `$HOME` 展开），请用 WSL。脚本本身跨平台，欢迎 PR 补 Windows 接线。
 
+**7. 状态栏只剩一行 `[hud]`？** 这是哨兵输出：launcher 找到了已安装的 glm-hud，但渲染本体没能加载（最典型的是插件更新写到一半的那一次重绘，新版本加载失败时 launcher 会自动改用上一个版本，全失败才显示 `[hud]`）。正常情况下 ≤60 秒内的下一次重绘就自愈；若几分钟后仍是 `[hud]`，重跑一次 `/glm-hud:setup` 即可修复（git clone 安装则确认目录还在 settings.json 指向的位置、`node <目录>/statusline.mjs` 能跑）。
+
 ## 空闲时会更新吗？
 
 会。Claude Code 默认只在每条消息、权限切换等事件后重绘状态栏（空闲时静止——这是引擎默认行为，claude-hud/ccstatusline 相同）。本项目的 `install.sh` 与 `/glm-hud:setup` 会自动写入 `statusLine.refreshInterval: 60`（引擎强制每 60 秒重绘，官方机制，上限 60s）。倒计时在最后一小时内带秒位（`剩41m07s`），空闲期也能看到它在走；限额百分比来自服务端，无人消耗 token 时本就不变。
@@ -142,8 +144,10 @@ token 按以下顺序取：
 ## 开发
 
 ```bash
-node --test        # 101 个测试：解析、渲染、降级、主题、端到端管道
+node --test        # 107 个测试：解析、渲染、降级、主题、端到端管道、launcher 回退链
 ```
+
+发版流程：同步 `package.json` / `.claude-plugin/plugin.json` / `.claude-plugin/marketplace.json` 三处版本号 → 在 `CHANGELOG.md` 记一条 → `git tag vX.Y.Z` 并发 GitHub Release（每次 push/PR 由 CI 跑全部测试）。
 
 调色板测试对深浅两种背景计算 WCAG 对比度，任一颜色跌破 4.5:1（粗体/进度条 3:1）即失败。`preview/` 里是各场景渲染截图与 ANSI 原文，由 `tools/gen-scenes.mjs` 生成。
 

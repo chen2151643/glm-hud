@@ -98,6 +98,7 @@ Segments drop in a fixed priority order rather than overflowing:
 - **Only one line, no ⚡5h/周/MCP** — no GLM token was picked up (not an install failure). `ANTHROPIC_AUTH_TOKEN` is used only when `ANTHROPIC_BASE_URL` points at a GLM domain (`bigmodel.cn` or `api.z.ai`); with a proxy/relay base URL, set `ZAI_API_KEY` or `GLM_API_KEY` instead.
 - **Gray `⚡5h -- 周 -- MCP --` placeholders** — the token or network check failed (wrong token, or offline); it retries after 90 s.
 - **Nothing renders at all** — smoke-test outside Claude Code: `echo '{}' | node ~/.claude/glm-hud/statusline.mjs` (plugin installs: `node ~/.claude/plugins/glm-hud/statusline.mjs`). At least one line and a clean exit means the script is fine and the problem is the wiring — re-run `/glm-hud:setup`.
+- **A lone `[hud]` line** — glm-hud is installed but the renderer failed to load (typically the one redraw that lands mid-plugin-update; the launcher falls back to the previous installed version first and only prints `[hud]` when none loads). The next redraw (≤ 60 s) self-heals; if it persists, re-run `/glm-hud:setup` (git-clone installs: check the directory is still where settings.json points).
 
 ## Does it update while idle?
 
@@ -114,8 +115,10 @@ Yes. Claude Code only redraws the statusline after messages and a few events (id
 ## Development
 
 ```bash
-node --test        # 101 tests: parsing, rendering, degradation, themes, e2e pipe
+node --test        # 107 tests: parsing, rendering, degradation, themes, e2e pipe, launcher fallback chain
 ```
+
+Releasing: bump the version in all three places (`package.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`), add a `CHANGELOG.md` entry, then tag `vX.Y.Z` and publish the GitHub Release — CI runs the full suite on every push and PR.
 
 The palette tests compute WCAG contrast ratios against both backgrounds and fail if a color regresses below 4.5:1 (3:1 for bold/bars).
 

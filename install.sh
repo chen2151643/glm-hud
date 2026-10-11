@@ -8,13 +8,27 @@ set -eu
 
 SETTINGS="${CLAUDE_SETTINGS:-$HOME/.claude/settings.json}"
 HERE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-CMD="node $HERE/statusline.mjs"
+# q — shell-quote anything outside a clearly safe character set, so install
+# paths with spaces survive in the statusLine command (same rule as setup.mjs,
+# which quotes only when needed).
+q() {
+  case "$1" in
+    *[![:alnum:]/._-]*)
+      printf "'%s'" "$(printf '%s' "$1" | sed "s/'/'\\\\''/g")" ;;
+    *) printf '%s' "$1" ;;
+  esac
+}
 FORCE=0
 [ "${1:-}" = "--force" ] && FORCE=1
 
-command -v node >/dev/null 2>&1 || { echo "error: node (>=20) is required"; exit 1; }
-NODE_MAJOR=$(node -p 'process.versions.node.split(".")[0]')
-[ "$NODE_MAJOR" -ge 20 ] || { echo "error: node >= 20 required, got $(node --version)"; exit 1; }
+NODE_BIN=$(command -v node 2>/dev/null) || { echo "error: node (>=20) is required"; exit 1; }
+NODE_MAJOR=$("$NODE_BIN" -p 'process.versions.node.split(".")[0]')
+[ "$NODE_MAJOR" -ge 20 ] || { echo "error: node >= 20 required, got $("$NODE_BIN" --version)"; exit 1; }
+
+# Absolute node path + quoted hud path: matches scripts/setup.mjs, so a later
+# /glm-hud:setup and this script produce the same command. If the runtime
+# later moves (nvm/mise/asdf), re-run either installer.
+CMD="$(q "$NODE_BIN") $(q "$HERE/statusline.mjs")"
 
 mkdir -p "$(dirname "$SETTINGS")"
 [ -f "$SETTINGS" ] || echo '{}' > "$SETTINGS"
@@ -57,4 +71,4 @@ console.log('backup: ' + backup);
 NODEEOF
 
 echo "done. the HUD shows up below your input after your next message (restart Claude Code if it doesn't)."
-echo "uninstall: sh $(dirname "$0")/uninstall.sh"
+echo "uninstall: sh '$(dirname "$0")/uninstall.sh'"
